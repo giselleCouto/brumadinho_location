@@ -1,0 +1,24 @@
+#Movimento Browniano
+#Giselle Couto Falcão
+
+p_inicial = dan		    #ponto inicial
+H = 5000				#parametro para o calcudo da quantidade de passos -
+dt = 1		 	        #tamanho do passo
+sigma = 0.2			    #velocidade média do rejeito verificar no modelo de velocidade
+mu = 0.01			    #retono médio
+nSimu = 10			    #número de simulações
+
+passos=round(H/dt); #passos
+S = zeros([nSimu, passos], dtype=float)
+x = range(0, int(passos), 1)
+
+for j in range(0, nSimu, 1):
+        S[j,0]= p_inicial
+        for i in x[:-1]:
+                S[j,i+1]=S[j,i]+S[j,i]*(mu-0.5*sigma*sigma)*dt+sigma*S[j,i]*sqrt(dt)*standard_normal();
+        plot(x, S[j])
+
+title('Simulacao %d movimento %.2f' % (int(passos), p_inicial)
+xlabel('tempo')
+ylabel('volume')
+show()
